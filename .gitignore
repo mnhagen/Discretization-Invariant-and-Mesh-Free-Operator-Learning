@@ -1,0 +1,13 @@
+# Ignore everything
+*
+
+# But not these folders:
+!data_generation/
+!scripts/
+
+# Allow files *inside* those folders:
+!data_generation/**
+!scripts/**
+
+# Also allow the .gitignore itself:
+!.gitignore

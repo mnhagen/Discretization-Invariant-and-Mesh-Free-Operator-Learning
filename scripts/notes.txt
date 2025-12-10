@@ -1,0 +1,27 @@
+FNO2D loss comparison:
+
+k16_w64:    5.02e-2
+k16_w128:   5.11e-2
+k32_w64:    5.44e-2
+k32_w128:   5.42e-2
+
+upped to 1000 samples:
+
+k16_w64:    2.24e-2
+k16_w128:   2.09e-2
+k32_w64:    2.49e-2
+k32_w128:   2.43e-2
+
+1000 samples, 128x128:
+
+sub1: 1.8e-4
+sub2: 1.73e-4
+
+
+to do tomorrow 18.11:
+
+1. read and understand this paper: https://openreview.net/pdf?id=7LSEkvEGCM
+2. try training model at 128x128 and checking CDE for 256x256
+3. figure out/understand why 32x32 and higher resolutions perform poorly
+4. understand how discrete aliasing error relates to error; to what extent is the increased loss due to that?
+5. 
