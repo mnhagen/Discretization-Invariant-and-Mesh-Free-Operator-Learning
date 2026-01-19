@@ -135,11 +135,20 @@ def generate_navier_stokes_multires(
 
             w_hat = expL*w_hat + (dt/6.0)*expL*(k1 + 2*k2 + 2*k3 + k4)
 
+            # --- NaN / Inf check ---
+            if not np.isfinite(w_hat).all():
+                print(f"WARNING: NaN/Inf detected at step {n}, aborting trajectory.")
+                return None
+
             if mask is not None:
                 w_hat *= mask
 
             if n % store_every == 0:
-                snapshots.append(np.real(np.fft.ifft2(w_hat)))
+                w_real = np.real(np.fft.ifft2(w_hat))
+                if not np.isfinite(w_real).all():
+                    print(f"[WARNING] NaN/Inf in physical field at step {n}.")
+                    return None
+                snapshots.append(w_real)
 
         return np.stack(snapshots, axis=0)
 
@@ -182,13 +191,23 @@ def generate_navier_stokes_multires(
                 w0, N, kx, ky, ksq, nu, dt, N_t, store_every,
                 forced, forcing_amp, mask
             )
+
+            if traj is None:
+                print(f"[SKIP] Sample {j} at N={N} blew up. Skipping.")
+                continue
+
             trajectories.append(traj.astype(dtype))
 
             print(f"Sample {j+1}/{num_samples}, frames={traj.shape[0]}")
 
         # Pack & save
+        num_ok = len(trajectories)
+        if num_ok == 0:
+            print(f"[ERROR] No valid trajectories for N={N}.")
+            continue
+
         max_T = max(t.shape[0] for t in trajectories)
-        W = np.zeros((num_samples, max_T, N, N), dtype=dtype)
+        W = np.zeros((num_ok, max_T, N, N), dtype=dtype)
         T_lengths = np.zeros(num_samples, dtype=np.int32)
 
         for j, tr in enumerate(trajectories):
@@ -197,7 +216,7 @@ def generate_navier_stokes_multires(
 
         save_path = os.path.join(
             save_dir,
-            f"navier_stokes2D_autoreg_N{N}_multi.h5"
+            f"navier_stokes2D_S{num_samples}_N{N}_multi.h5"
         )
         with h5py.File(save_path, "w") as f:
             f.create_dataset("omega", data=W, compression="gzip")
@@ -227,19 +246,20 @@ def generate_navier_stokes_multires(
 # -------------------------------------------------------------------------
 # Example usage
 # -------------------------------------------------------------------------
+
 if __name__ == "__main__":
     generate_navier_stokes_multires(
-        resolutions=[256, 128, 64, 32],
+        resolutions=[256, 128, 64],
         L=1.0,
-        L_t=5.0,
-        dt=5e-3,
+        L_t=1.0,
+        dt=1e-2,
         nu=1e-5,
-        num_samples=100,
-        kmax=12,
-        store_every=1000,
+        num_samples=1000,
+        kmax=16,
+        store_every=100,
         dtype=np.float32,
         save_dir="/scratch/mnhagen/datasets/navier_stokes_multires",
         forced=True,
         forcing_amp=0.5,
-        spectral_filter_K0=16,
+        spectral_filter_K0= None,
     )

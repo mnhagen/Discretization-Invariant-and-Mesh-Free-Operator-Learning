@@ -1,0 +1,9 @@
+This document is a place to track what changes were made to the CNO2D to attempt to optimize it, and to solve
+the sudden large spike in the loss.
+
+changing scheduler:         cosineannealingLR decreases much faster but explodes, stepLR is stable but bottoms
+                            out at 1e-3
+changing learning rate:     halved learning rate, loss descent is much slower but seems stable even for cosine
+adding gradient clipping:   I'm not sure this had any effect, at least the print message has never been
+                            outputted
+setting batch_norm = True:  tried going back to LR = 1e-3, cosine but with batch_norm: loss 1e-3
