@@ -9,11 +9,11 @@ class SpectralConv2d(nn.Module):
     def __init__(self, in_channels, out_channels, modes1, modes2):
         super(SpectralConv2d, self).__init__()
         """
-        1D Fourier layer: FFT -> linear transform --> Inverse FFT
+        2D Fourier layer: FFT -> linear transform --> Inverse FFT
         """
 
         self.in_channels = in_channels
-        self.out_channels = out_channels
+        self.out_channels = out_channels    
         self.modes1 = modes1
         self.modes2 = modes2
 

@@ -90,7 +90,7 @@ def generate_navier_stokes_multires(
         ksq[0,0] = 1.0
         return dx, x, y, kx, ky, ksq
 
-    # Solver step (same as yours)
+    # Solver step
     def velocity_from_vorticity(ω_hat, kx, ky, ksq):
         ψ_hat = -ω_hat / ksq
         u_hat = 1j * ky * ψ_hat

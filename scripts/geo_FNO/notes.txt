@@ -1,0 +1,13 @@
+changes i made to the base geo-FNO to mention in the paper:
+
+kept the 42 length vector, could be changed but didnt see a reason to
+added patience and early stopping
+angle has a discontinuity as it confined between +-pi; will change angle to either sin(angle) and cos(angle)
+or dx and dy: also assumes input is [0,1]^2 so change that as well
+added scaling to fourier modes on computational grid; basis was only proper when the input was also on [0,1]^2,
+but incompressible Euler was on x in [0, 1.6], y in [0, 0.41]
+
+NB! changing angle to sin(angle), cos(angle) did not get rid of the rift. tried adding normalization in fft and
+ifft, real constraint on weights, nothing fixed it. trying to add quadrature weighting before calling it a day
+
+added scheduler, normalization to geo fno
