@@ -11,3 +11,18 @@ NB! changing angle to sin(angle), cos(angle) did not get rid of the rift. tried 
 ifft, real constraint on weights, nothing fixed it. trying to add quadrature weighting before calling it a day
 
 added scheduler, normalization to geo fno
+
+feeding the model node index as additional input information actually fixed the model; prediction is still
+somewhat poor, but it is clearly recognizable as the correct solution. will now try to also feed the model
+the pressure and see if that further improves performance.  
+
+
+We see significant error when doing fft->ifft of the initial condition, which is bettered by applying iphi.
+Here are the errors for different values of modes1, modes2:
+
+format: modes1, modes2: relMSE
+
+24, 12: 1.94e-1
+32, 12: 1.29e-1
+32, 16: 2.81e-2
+24, 16: 8.00e-2

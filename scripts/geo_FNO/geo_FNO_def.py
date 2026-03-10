@@ -340,7 +340,7 @@ class IPHI(nn.Module):
         h = F.gelu(self.fc1(h))
         h = F.gelu(self.fc2(h))
         h = self.fc3(h)
-        return x + x * h
+        return x + h
 
 
 
