@@ -26,3 +26,8 @@ format: modes1, modes2: relMSE
 32, 12: 1.29e-1
 32, 16: 2.81e-2
 24, 16: 8.00e-2
+
+
+notes on thesis writing:
+
+non uniform NS and elasticity not mentioned in dataset section; include if mentioned later in paper.
