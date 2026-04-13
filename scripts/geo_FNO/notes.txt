@@ -31,3 +31,60 @@ format: modes1, modes2: relMSE
 notes on thesis writing:
 
 non uniform NS and elasticity not mentioned in dataset section; include if mentioned later in paper.
+
+
+
+HTGR models loss:
+
+vanilla:
+
+    z, T:
+    Best val relRMSE: 8.623981e-03 at epoch 30
+    Test relRMSE: 9.102986e-03 | Test MSE: 5.212278e+01
+
+    z, T, z*T:
+    Best val relRMSE: 1.220494e-02 at epoch 24
+    Test relRMSE: 1.058622e-02 | Test MSE: 7.050904e+01
+
+
+    z, T, z^2, T^2, z*T:
+    Best val relRMSE: 2.912970e-03 at epoch 102
+    Test relRMSE: 2.583876e-03 | Test MSE: 4.113854e+00
+
+normalized:
+
+    z, T:
+    Best val relRMSE: 1.018177e-02 at epoch 19
+    Test relRMSE: 9.513722e-03 | Test MSE: 5.942555e+01
+
+    z, T, z*T:
+    Best val relRMSE: 1.310973e-02 at epoch 23
+    Test relRMSE: 8.965948e-03 | Test MSE: 4.985552e+01
+
+    z, T, z^2, T^2, z*T:
+    Best val relRMSE: 9.223184e-04 at epoch 232
+    Test relRMSE: 9.462218e-04 | Test MSE: 5.422029e-01
+
+physical:
+
+    [z, T, sin(pi*(z-z_min)/Lz), T*sin(pi*(z-z_min)/Lz)]:
+    Best val relRMSE: 6.663721e-03 at epoch 17
+    Test relRMSE: 6.131237e-03 | Test MSE: 2.373070e+01
+
+    [z, T, sin(pi*(z-z_min)/Lz), T*sin(pi*(z-z_min)/Lz), sin(2*pi*(z-z_min)/Lz)]:
+    Best val relRMSE: 5.671345e-03 at epoch 23
+    Test relRMSE: 5.760628e-03 | Test MSE: 2.128643e+01
+
+    [z, T, sin(pi*(z-z_min)/Lz), T*sin(pi*(z-z_min)/Lz), cos(pi*(z-z_min)/Lz)]:
+    Best val relRMSE: 2.472064e-03 at epoch 84
+    Test relRMSE: 2.579207e-03 | Test MSE: 4.031768e+00
+
+    [z, T, sin(pi*(z-z_min)/Lz), T*sin(pi*(z-z_min)/Lz), cos(pi*(z-z_min)/Lz), T*cos(pi*(z-z_min)/Lz)]:
+    Best val relRMSE: 8.374836e-03 at epoch 31
+    Test relRMSE: 7.410417e-03 | Test MSE: 3.539737e+01
+
+
+meeting notes 13.04:
+
+feature engineering results
+how much should i talk about? elasticity? 

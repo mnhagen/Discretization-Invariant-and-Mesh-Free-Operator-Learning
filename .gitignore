@@ -11,3 +11,6 @@
 
 # Also allow the .gitignore itself:
 !.gitignore
+
+!thesis/
+!thesis/**
