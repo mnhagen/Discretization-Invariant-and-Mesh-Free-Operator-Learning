@@ -87,4 +87,17 @@ physical:
 meeting notes 13.04:
 
 feature engineering results
-how much should i talk about? elasticity? 
+how much should i talk about? elasticity?
+
+change normalization from std norm to min max norm
+put contributions alone before the conclusion, talk about the seam there. add one sentence at the start of results 
+
+look into what needs to be done: green light meeting, 70% meeting
+
+
+
+
+prismatic HTGR
+states are steady states, transients not included; healing inlet coolant is constant 250 degrees
+coupled neutronics-thermohydraulics: 1 outer loop is neutronics, calculates 
+still not realistic: we fix boundary temperature, which we cannot really do. this is the easiest way to get states. otherwise model transients, which takes more time.
